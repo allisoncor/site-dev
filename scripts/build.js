@@ -35,6 +35,14 @@ const warn = m => { warnings.push(m); console.warn('! ' + m); };
 // ---------- helpers ----------
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const urlPath = p => p.split('/').map(encodeURIComponent).join('/');
+// Project file URL with a short content hash, so a replaced picture shows up at once
+// instead of browsers keeping the old copy (GitHub Pages lets them cache for 10 minutes).
+const crypto = require('crypto');
+const fileUrl = p => {
+  const f = path.join(ROOT, p);
+  const v = fs.existsSync(f) ? crypto.createHash('sha1').update(fs.readFileSync(f)).digest('hex').slice(0, 8) : '';
+  return urlPath(p) + (v ? `?v=${v}` : '');
+};
 // Keep the last three words together so a paragraph never ends on a lone word.
 const noOrphan = s => esc(s).replace(/ (\S+) (\S+)$/, '&nbsp;$1&nbsp;$2');
 // Titles with descenders (g, j, p, q, y, J) need the .project--desc spacing tweak (see style.css).
@@ -131,7 +139,7 @@ function card(p, indent) {
   if (p.hero) {
     const src = `projects/${p.name}/${p.hero}`;
     const size = imageSize(path.join(SRC_PROJECTS, p.name, p.hero));
-    img = `<img src="${urlPath(src)}" alt="${esc(p.alt)}"${size ? ` width="${size[0]}" height="${size[1]}"` : ''}>`;
+    img = `<img src="${fileUrl(src)}" alt="${esc(p.alt)}"${size ? ` width="${size[0]}" height="${size[1]}"` : ''}>`;
   }
   const i = indent;
   return `${i}<article class="${cls.join(' ')}">
@@ -171,12 +179,12 @@ function projectPage(p, prev, next, shell) {
     const size = imageSize(path.join(ROOT, src));
     return `
       <figure class="work-figure">
-        <a href="../${urlPath(src)}" target="_blank" rel="noopener"><img src="../${urlPath(src)}" alt="${esc(p.title)} — image ${n + 1} of ${images.length}"${size ? ` width="${size[0]}" height="${size[1]}"` : ''} loading="${n < 2 ? 'eager' : 'lazy'}"></a>
+        <a href="../${fileUrl(src)}" target="_blank" rel="noopener"><img src="../${fileUrl(src)}" alt="${esc(p.title)} — image ${n + 1} of ${images.length}"${size ? ` width="${size[0]}" height="${size[1]}"` : ''} loading="${n < 2 ? 'eager' : 'lazy'}"></a>
       </figure>`;
   }).join('');
 
   const links = [];
-  if (p.meta.pdf) links.push(`<a class="btn" href="../${urlPath(`projects/${p.name}/${p.meta.pdf}`)}" target="_blank" rel="noopener">${esc(p.meta['pdf-label'] || 'View PDF')}</a>`);
+  if (p.meta.pdf) links.push(`<a class="btn" href="../${fileUrl(`projects/${p.name}/${p.meta.pdf}`)}" target="_blank" rel="noopener">${esc(p.meta['pdf-label'] || 'View PDF')}</a>`);
   if (p.meta.behance) links.push(`<a class="work-link" href="${esc(p.meta.behance)}" target="_blank" rel="noopener">View on Behance</a>`);
   const pager = (q, cls, label) => q
     ? `<a class="work-pager__${cls}" href="${q.name}.html"><span>${label}</span>${esc(q.title)}</a>`
