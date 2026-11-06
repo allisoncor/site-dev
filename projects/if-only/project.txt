@@ -3,6 +3,7 @@ order: 3
 layout: tile
 card: The goal of this project is to redesign the cover for “If Only I Had Told Her” by Laura Nowlin to boost its visual appeal, attract new readers, and increase sales.
 button: View Cover
+show-hero: no
 alt: Redesigned book cover for 'If Only I Had Told Her' by Laura Nowlin
 behance: https://www.behance.net/gallery/198776199/If-Only-I-Had-Told-Her-Cover-Redo
 
