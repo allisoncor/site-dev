@@ -1,0 +1,11 @@
+title: “If Only I Had Told Her”
+order: 3
+layout: tile
+card: The goal of this project is to redesign the cover for “If Only I Had Told Her” by Laura Nowlin to boost its visual appeal, attract new readers, and increase sales.
+button: View Cover
+alt: Redesigned book cover for 'If Only I Had Told Her' by Laura Nowlin
+behance: https://www.behance.net/gallery/198776199/If-Only-I-Had-Told-Her-Cover-Redo
+
+The goal of this project is to redesign the cover for “If Only I Had Told Her” by Laura Nowlin to boost its visual appeal, attract new readers, and increase sales.
+
+The top three objectives were to create a visually striking cover that accurately reflects the book’s themes and meaning while using text as the main focus. The target audience is fiction readers aged 13 to 25, particularly those interested in contemporary romance or drama, who may not know the author or publisher, so the cover has to grab their attention and make them curious about the book.

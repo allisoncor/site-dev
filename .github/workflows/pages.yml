@@ -1,0 +1,56 @@
+# Builds the site from projects/ and publishes it to GitHub Pages on every push to main.
+# Repo setting needed once: Settings -> Pages -> Source = "GitHub Actions".
+# Dev copy: set repository variable SITE_NOINDEX = true (Settings -> Secrets and variables -> Actions -> Variables).
+name: Build and publish site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build site into _site/
+        env:
+          SITE_NOINDEX: ${{ vars.SITE_NOINDEX }}
+        run: node scripts/build.js
+
+      # Web-sized pictures: anything wider or taller than 2560 px is scaled down,
+      # and JPEGs are re-saved at quality 85 (colour profiles kept). Originals in the repo are untouched.
+      - name: Resize project images
+        run: |
+          command -v mogrify >/dev/null || (sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick)
+          find _site/projects -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -print0 |
+            xargs -0 -r -n 8 mogrify -auto-orient -resize '2560x2560>' -quality 85
+          du -sh _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

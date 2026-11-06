@@ -1,0 +1,11 @@
+title: Line / Curve
+order: 1
+layout: hero
+card: A print magazine I designed, inspired by Brutalist architecture. The concept behind the magazine was to merge rigid, sharp lines with softer, more fluid elements, embodying the contrast between structure and creativity.
+button: View Magazine
+alt: Line / Curve — print magazine spread inspired by Brutalist architecture
+behance: https://www.behance.net/gallery/198778267/Line-Curve-an-Architectural-Magazine
+pdf: line-curve-magazine.pdf
+pdf-label: Read the full magazine (PDF)
+
+A print magazine I designed, inspired by Brutalist architecture. The concept behind the magazine was to merge rigid, sharp lines with softer, more fluid elements, embodying the contrast between structure and creativity.

@@ -1,0 +1,8 @@
+title: Jei
+order: 4
+layout: tile
+card: I was hired by Radeus Labs to refresh Jei’s logo. They wanted a new logo for their website and press releases.
+button: View Logo
+alt: Jei Communication Recorders logo refresh
+
+I was hired by Radeus Labs to refresh Jei’s logo. They wanted a new logo for their website and press releases.

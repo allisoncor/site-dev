@@ -1,0 +1,8 @@
+title: Clarity
+order: 5
+layout: tile
+card: Developing two hardware products — a metal mechanism with a handle that touches the forehead, and an inhaler/electronic inhalant device. These two devices are completely different but achieve the same memory-enhancing effects for their clients.
+button: View Product
+alt: Clarity inhaler — hardware product design
+
+Developing two hardware products — a metal mechanism with a handle that touches the forehead, and an inhaler/electronic inhalant device. These two devices are completely different but achieve the same memory-enhancing effects for their clients.
