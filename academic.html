@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Academic — Allison Correnti</title>
+  <meta name="description" content="Academic materials for faculty review, ART 5500 Professional Practices.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@300;400;800&family=Tenor+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=2026-11-06a">
+  <style>
+    .acad { max-width: var(--content-max); width: 100%; margin: 0 auto; padding: 0 var(--pad-x) clamp(48px, 5.208vw, 100px); }
+    .acad h1 {
+      margin: clamp(24px, 2.917vw, 56px) 0 clamp(12px, 1.25vw, 24px);
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(30px, 3.906vw, 75px); letter-spacing: 0.14em; text-transform: uppercase; line-height: 1.1;
+    }
+    .acad-intro {
+      max-width: 46em; margin: 0 0 clamp(32px, 3.333vw, 64px);
+      font-family: var(--font-project); font-weight: 300; font-size: clamp(15px, 1.25vw, 24px); line-height: 1.5; color: var(--ink-soft);
+    }
+    .acad-section { margin-bottom: clamp(40px, 4.167vw, 80px); }
+    .acad-section h2 {
+      display: flex; align-items: center; gap: 0.45em;
+      margin: 0 0 clamp(16px, 1.667vw, 32px);
+      font-family: var(--font-display); font-weight: 700; -webkit-text-stroke: 0.035em currentColor;
+      font-size: clamp(16px, 1.25vw, 24px); letter-spacing: 0.06em;
+    }
+    .acad-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22em), 1fr)); gap: clamp(16px, 1.25vw, 24px); }
+    .acad-card {
+      display: flex; flex-direction: column; gap: 0.6em;
+      padding: clamp(20px, 1.875vw, 36px);
+      background: #fff; border-radius: clamp(14px, 1.875vw, 36px);
+      font-family: var(--font-project); font-size: clamp(14px, 1.042vw, 20px);
+    }
+    .acad-card h3 { margin: 0; font-family: var(--font-project); font-weight: 800; font-size: 1.15em; }
+    .acad-card .acad-sub { margin: 0; font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.75em; color: var(--rose-dark); }
+    .acad-card p { margin: 0; font-weight: 300; color: var(--ink-soft); line-height: 1.5; }
+    .acad-card .acad-links { display: flex; flex-wrap: wrap; gap: 0.6em 1.4em; align-items: center; margin-top: auto; padding-top: 0.6em; }
+    .acad-card .btn { margin-top: 0; }
+    .acad-card--todo { background: transparent; border: 2px dashed #c9b7b5; }
+    .acad-card--todo h3, .acad-card--todo p { color: #8a7a78; }
+    .acad-flag { font-size: 0.85em; color: var(--rose-dark) !important; font-weight: 400 !important; }
+  </style>
+</head>
+<body class="page-frame">
+
+  <!-- ===== Decorative rose accent (top right) ===== -->
+  <svg class="deco deco--top-right" viewBox="0 0 260 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M260 0 L260 210 C 190 190 130 130 105 60 C 95 35 90 15 88 0 Z" fill="#e5cdce"/>
+  </svg>
+
+  <!-- ===== Banner (same on every page) ===== -->
+  <header class="site-header">
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+      <img src="images/Icons/Menu.png" alt="" width="78" height="78">
+    </button>
+    <nav class="site-nav">
+      <a href="index.html">Portfolio</a>
+      <a href="physical-designs.html">Physical Designs</a>
+      <a href="resume.html">Resume</a>
+      <a href="about.html">About</a>
+      <a href="academic.html" aria-current="page">Academic</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <nav class="mobile-menu" aria-label="Mobile menu">
+    <a href="index.html">Portfolio</a>
+    <a href="physical-designs.html">Physical Designs</a>
+    <a href="resume.html">Resume</a>
+    <a href="about.html">About</a>
+    <a href="academic.html">Academic</a>
+      <a href="contact.html">Contact</a>
+  </nav>
+  <!-- ===== /Banner ===== -->
+
+  <main class="acad">
+    <h1>Academic</h1>
+    <p class="acad-intro">Materials for faculty review, ART 5500 Professional Practices, Fall&nbsp;2026. This page is temporary and will be removed after the semester&nbsp;ends.</p>
+
+    <section class="acad-section">
+      <h2>Resume</h2>
+      <div class="acad-cards">
+        <article class="acad-card">
+          <p class="acad-sub">Resume</p>
+          <h3>Allison Correnti — Design Resume</h3>
+          <p>Education, experience, exhibitions, awards, publications and skills.</p>
+          <div class="acad-links">
+            <a class="btn" href="files/allison-correnti-resume.pdf" target="_blank" rel="noopener">View PDF</a>
+            <a class="work-link" href="resume.html">Resume page</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="acad-section">
+      <h2>Writing Samples</h2>
+      <div class="acad-cards">
+        <article class="acad-card">
+          <p class="acad-sub">AH 1104 · Art History</p>
+          <h3>Domestic Perspectives: Women in Gender Roles</h3>
+          <p>A proposed exhibition of five paintings from 1657 to 1943, from Johannes Vermeer’s <em>The Little Street</em> to Richard Heymann’s <em>Glückliche Mütter</em>, exploring how women in domestic roles have been portrayed.</p>
+          <div class="acad-links">
+            <a class="btn" href="files/academic/ah-1104-domestic-perspectives.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </article>
+        <article class="acad-card">
+          <p class="acad-sub">SSCI 3000 · Fall 2024</p>
+          <h3>The Gendered Legacy of Colonialism</h3>
+          <p>Final essay on how colonial powers used gender and sexuality to control and break down Indigenous societies.</p>
+          <div class="acad-links">
+            <a class="btn" href="files/academic/ssci-3000-final-essay.pdf" target="_blank" rel="noopener">View PDF</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer (same on every page) ===== -->
+  <footer class="site-footer">
+    <svg class="wave-top" viewBox="0 0 1920 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#c8898c" d="M0,240 C 340,100 780,90 1100,160 C 1410,225 1700,190 1920,90 L1920,310 L0,310 Z"/>
+      <path fill="#b05a5e" d="M0,270 C 340,130 780,120 1100,190 C 1410,255 1700,220 1920,120 L1920,310 L0,310 Z"/>
+    </svg>
+    <div class="footer-body">
+    <div class="footer-links">
+      <ul>
+        <li><a href="index.html">Portfolio Home</a></li>
+        <li><a href="physical-designs.html">Physical Designs</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+      <ul>
+        <li><a href="mailto:allison.correnti@gmail.com">Email</a></li>
+        <li><a href="https://www.linkedin.com/in/allison-correnti" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="#">Instagram</a></li>         <!-- TODO: profile URL -->
+      </ul>
+    </div>
+    </div>
+    <svg class="wave-bottom" viewBox="0 0 1920 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path fill="#b05a5e" d="M0,-10 H1920 V210 H0 Z"/>
+      <path fill="#8e4245" d="M0,200 C 300,90 700,60 1080,105 C 1420,146 1700,125 1920,40 L1920,120 C 1680,200 1380,220 1040,185 C 720,152 340,170 120,200 Z"/>
+    </svg>
+  </footer>
+  <!-- ===== /Footer ===== -->
+
+  <script src="js/main.js?v=2026-10-25"></script>
+</body>
+</html>
