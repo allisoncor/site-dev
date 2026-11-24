@@ -26,6 +26,8 @@ const OUT = path.join(ROOT, '_site');
 const IMG = /\.(jpe?g|png|webp|gif)$/i;
 const MARK_START = '<!-- PROJECT CARDS -->';
 const MARK_END = '<!-- /PROJECT CARDS -->';
+const PD_START = '<!-- PHYSICAL PIECES -->';
+const PD_END = '<!-- /PHYSICAL PIECES -->';
 // top-level things that are NOT part of the published site
 const SKIP = new Set(['.git', '.github', '.gitignore', '_site', 'scripts', 'design', 'projects', 'node_modules', 'README.md']);
 
@@ -47,6 +49,17 @@ const fileUrl = p => {
 const noOrphan = s => esc(s).replace(/ (\S+) (\S+)$/, '&nbsp;$1&nbsp;$2');
 // Titles with descenders (g, j, p, q, y, J) need the .project--desc spacing tweak (see style.css).
 const hasDescender = t => /[gjpqyJ]/.test(t);
+// "a, b, c" -> ['a', 'b', 'c']
+const splitList = s => String(s || '').split(',').map(x => x.trim()).filter(Boolean);
+const yes = s => /^(yes|true|1)$/i.test(String(s || '').trim());
+// Version tag for css/js links: a short hash of the file, so browsers fetch a changed file at once.
+const assetVersion = p => {
+  const f = path.join(ROOT, p);
+  return fs.existsSync(f) ? crypto.createHash('sha1').update(fs.readFileSync(f)).digest('hex').slice(0, 8) : '0';
+};
+// css/work.css and js/physical.js links in hand-written pages get the current version tag
+const withAssetVersions = html => html.replace(/((?:\.\.\/)?)(css\/work\.css|js\/physical\.js)\?v=[^"]*/g,
+  (m, up, f) => `${up}${f}?v=${assetVersion(f)}`);
 
 function copyDir(src, dst) {
   fs.mkdirSync(dst, { recursive: true });
@@ -107,8 +120,19 @@ function loadProjects() {
     const { meta, paragraphs } = readProjectFile(path.join(dir, 'project.txt'));
     const files = fs.readdirSync(dir);
     const hero = files.find(f => /^hero\./i.test(f) && IMG.test(f));
-    const gallery = files.filter(f => /^\d+\./.test(f) && IMG.test(f)).sort((a, b) => parseInt(a) - parseInt(b));
+    // gallery: the numbered pictures in number order, or the files listed in "gallery:"
+    let gallery = files.filter(f => /^\d+\./.test(f) && IMG.test(f)).sort((a, b) => parseInt(a) - parseInt(b));
+    if (meta.gallery) {
+      gallery = splitList(meta.gallery).filter(f => {
+        if (files.includes(f)) return true;
+        warn(`projects/${name}: gallery picture "${f}" not found in the folder`);
+        return false;
+      });
+    }
     const layout = (meta.layout || 'tile').toLowerCase();
+    const section = (meta.section || 'portfolio').toLowerCase();
+    if (!['portfolio', 'physical'].includes(section)) warn(`projects/${name}: section "${section}" should be portfolio or physical`);
+    if (meta.big && !gallery.includes(meta.big)) warn(`projects/${name}: big picture "${meta.big}" is not in the gallery`);
 
     if (!meta.title) warn(`projects/${name}: no "title:" line`);
     if (!hero) warn(`projects/${name}: no hero image (hero.jpg) — homepage card will have no picture`);
@@ -116,7 +140,7 @@ function loadProjects() {
     if (meta.pdf && !files.includes(meta.pdf)) warn(`projects/${name}: pdf "${meta.pdf}" not found in the folder`);
 
     list.push({
-      name, meta, paragraphs, hero, gallery, layout,
+      name, meta, paragraphs, hero, gallery, layout, section,
       title: meta.title || name,
       order: Number.isFinite(parseFloat(meta.order)) ? parseFloat(meta.order) : 999,
       card: meta.card || paragraphs[0] || '',
@@ -173,15 +197,53 @@ function homepageCards(projects) {
 }
 
 // ---------- project page ----------
+// Settings for js/work.js (gallery layout, cropping), from project.txt:
+//   big: 4.jpg            the picture shown as the big 2×2 tile
+//   big-row: 1            its row (1 = first; default 1)
+//   big-col: 2            which tile of that row it starts at (1 = first; default 2)
+//   big-fill: yes         zoom the big picture in to fill its tile (else it is shown whole)
+//   rows: 4, 4            fixed number of tiles per row (no big tile)
+//   whole-rows: 1         rows that show only whole tiles, nothing cut off at the window edges
+//   zoom: 2.png 1.3       extra zoom for single pictures ("file factor", comma-separated)
+//   whole: a.jpg, b.jpg   pictures never cropped in their tile
+function galleryData(p, images) {
+  const m = p.meta;
+  const data = { images };
+  if (m.big) data.big = {
+    file: m.big,
+    row: Math.max(0, (parseInt(m['big-row'], 10) || 1) - 1),
+    col: Math.max(0, (parseInt(m['big-col'], 10) || 2) - 1),
+    fill: yes(m['big-fill']),
+  };
+  if (m.rows) data.rows = splitList(m.rows).map(n => parseInt(n, 10)).filter(n => n > 0);
+  if (m['whole-rows']) data.wholeRows = splitList(m['whole-rows']).map(n => parseInt(n, 10) - 1).filter(n => n >= 0);
+  if (m.zoom) {
+    data.zoom = {};
+    for (const z of splitList(m.zoom)) {
+      const mm = z.match(/^(.+?)\s+([\d.]+)$/);
+      if (mm) data.zoom[mm[1]] = parseFloat(mm[2]); else warn(`projects/${p.name}: zoom "${z}" should be "file factor", e.g. "2.png 1.3"`);
+    }
+  }
+  if (m.whole) { data.whole = {}; for (const f of splitList(m.whole)) data.whole[f] = 1; }
+  return data;
+}
+
+const ARROW_LEFT = '<svg class="work-back__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12H4M11 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const ARROW_DOWN = '<svg class="work2-process__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v17M5 13l7 7 7-7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
 function projectPage(p, prev, next, shell) {
-  const images = [...(p.showHero && p.hero ? [p.hero] : []), ...p.gallery].map(f => `projects/${p.name}/${f}`);
-  const gallery = images.map((src, n) => {
-    const size = imageSize(path.join(ROOT, src));
-    return `
-      <figure class="work-figure">
-        <a href="../${fileUrl(src)}" target="_blank" rel="noopener"><img src="../${fileUrl(src)}" alt="${esc(p.title)} — image ${n + 1} of ${images.length}"${size ? ` width="${size[0]}" height="${size[1]}"` : ''} loading="${n < 2 ? 'eager' : 'lazy'}"></a>
-      </figure>`;
-  }).join('');
+  const physical = p.section === 'physical';
+  const files = [...(p.hero ? [p.hero] : []), ...p.gallery];
+  const urls = files.map(f => `../${fileUrl(`projects/${p.name}/${f}`)}`);
+
+  let hero = '';
+  if (p.hero) {
+    const size = imageSize(path.join(SRC_PROJECTS, p.name, p.hero));
+    hero = `
+      <button class="work2-hero" type="button" data-index="0" aria-label="Enlarge: ${esc(p.title)}">
+        <img src="${urls[0]}" alt="${esc(p.alt)}"${size ? ` width="${size[0]}" height="${size[1]}"` : ''}>
+      </button>`;
+  }
 
   const links = [];
   if (p.meta.pdf) links.push(`<a class="btn" href="../${fileUrl(`projects/${p.name}/${p.meta.pdf}`)}" target="_blank" rel="noopener">${esc(p.meta['pdf-label'] || 'View PDF')}</a>`);
@@ -189,41 +251,71 @@ function projectPage(p, prev, next, shell) {
   const pager = (q, cls, label) => q
     ? `<a class="work-pager__${cls}" href="${q.name}.html"><span>${label}</span>${esc(q.title)}</a>`
     : '<span></span>';
-  const paragraphs = p.paragraphs.length ? p.paragraphs : [p.card];
+  const paragraphs = p.paragraphs.length ? p.paragraphs : (p.meta.card ? [p.meta.card] : []);
+  const back = physical
+    ? `<a class="work-back" href="../physical-designs.html">${ARROW_LEFT}Physical designs</a>`
+    : `<a class="work-back" href="../index.html">${ARROW_LEFT}All projects</a>`;
+  // JSON for js/work.js; "</" is escaped so nothing in it can close the script tag
+  const data = JSON.stringify(galleryData(p, urls)).replace(/</g, '\\u003c');
 
-  const main = `  <main class="work">
-    <a class="work-back" href="../index.html">&larr; All projects</a>
-    <h1 class="site-title work-title">${esc(p.title)}</h1>
-
-    <div class="work-intro">
-${paragraphs.map(t => `      <p>${noOrphan(t)}</p>`).join('\n')}${links.length ? `
-      <div class="work-links">${links.join(' ')}</div>` : ''}
-    </div>
-
-    <div class="work-gallery">${gallery}
-    </div>
-
+  const main = `  <main class="work${physical ? ' work--physical' : ''}">
+    ${back}
+    <section class="work2-intro">${hero}
+      <div class="work2-text">
+        <h1>${esc(p.title)}</h1>${p.meta.meta ? `
+        <p class="work2-meta">${esc(p.meta.meta)}</p>` : ''}
+${paragraphs.map(t => `        <p>${noOrphan(t)}</p>`).join('\n')}${links.length ? `
+        <div class="work-links">${links.join(' ')}</div>` : ''}
+      </div>
+    </section>
+${p.gallery.length ? `
+    <h2 class="work2-process">My process
+      ${ARROW_DOWN}
+    </h2>
+    <div class="work2-gallery" id="gallery"></div>
+` : ''}
     <nav class="work-pager" aria-label="More projects">
       ${pager(prev, 'prev', '&larr; Previous')}
       ${pager(next, 'next', 'Next &rarr;')}
     </nav>
-  </main>`;
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox__close" type="button" aria-label="Close">&times;</button>
+    <button class="lightbox__prev" type="button" aria-label="Previous image">&larr;</button>
+    <img alt="">
+    <button class="lightbox__next" type="button" aria-label="Next image">&rarr;</button>
+    <div class="lightbox__count"></div>
+  </div>
+  <script type="application/json" id="work-data">${data}</script>
+  <script src="../js/work.js?v=${assetVersion('js/work.js')}"></script>`;
 
   return shell
     .replace('<!-- TITLE -->', `${esc(p.title)} — Allison Correnti`)
-    .replace('<!-- DESCRIPTION -->', esc((paragraphs[0] || p.title).slice(0, 155)))
+    .replace('<!-- DESCRIPTION -->', esc((paragraphs[0] || p.meta.meta || p.title).slice(0, 155)))
     .replace('<!-- MAIN -->', main);
 }
 
-// The project-page shell is built from art-glass.html, so the banner, footer, fonts and
+// The project-page shell is built from physical-designs.html, so the banner, footer, fonts and
 // stylesheet version always match the hand-written pages. Paths get a ../ prefix.
 function pageShell() {
-  let h = fs.readFileSync(path.join(ROOT, 'art-glass.html'), 'utf8');
+  let h = fs.readFileSync(path.join(ROOT, 'physical-designs.html'), 'utf8');
   h = h.replace(/<title>[\s\S]*?<\/title>/, '<title><!-- TITLE --></title>')
        .replace(/(<meta name="description" content=")[^"]*/, '$1<!-- DESCRIPTION -->')
        .replace(/  <main>[\s\S]*?<\/main>/, '<!-- MAIN -->')
+       .replace(/\s*<script src="js\/physical\.js[^"]*"><\/script>/, '')
+       .replace(/ aria-current="page"/g, '')
        .replace(/(href|src)="(?!https?:|mailto:|#|\/|\.\.\/)([^"]+)"/g, '$1="../$2"');
   return h;
+}
+
+// ---------- Physical Designs page: the collage pieces ----------
+function physicalPieces(projects) {
+  return projects.map(p => {
+    const src = `projects/${p.name}/${p.hero}`;
+    const size = imageSize(path.join(SRC_PROJECTS, p.name, p.hero));
+    return `        <a class="pd-piece" href="work/${p.name}.html"><span class="pd-piece__img"><img src="${fileUrl(src)}" alt="${esc(p.title)}"${size ? ` width="${size[0]}" height="${size[1]}"` : ''}><span class="pd-piece__label">${esc(p.title)}</span></span></a>`;
+  }).join('\n');
 }
 
 // ---------- build ----------
@@ -237,6 +329,10 @@ for (const e of fs.readdirSync(ROOT, { withFileTypes: true })) {
 }
 
 const projects = loadProjects();
+const portfolio = projects.filter(p => p.section !== 'physical');
+const physical = projects.filter(p => p.section === 'physical' && p.layout !== 'hidden');
+if (physical.some(p => !p.hero)) warn('a "section: physical" project has no hero picture — it is left off the Physical Designs page');
+physical.splice(0, physical.length, ...physical.filter(p => p.hero));
 
 // project files that are published: hero, numbered images, the PDF
 for (const p of projects) {
@@ -254,17 +350,31 @@ const a = indexSrc.indexOf(MARK_START), b = indexSrc.indexOf(MARK_END);
 if (a < 0 || b < a) {
   warn(`index.html: ${MARK_START} … ${MARK_END} markers not found — homepage cards not generated`);
 } else {
-  const html = indexSrc.slice(0, a + MARK_START.length) + '\n' + homepageCards(projects) + '\n      ' + indexSrc.slice(b);
+  const html = indexSrc.slice(0, a + MARK_START.length) + '\n' + homepageCards(portfolio) + '\n      ' + indexSrc.slice(b);
   fs.writeFileSync(path.join(OUT, 'index.html'), html);
 }
 
-// project pages (Previous / Next follow homepage order; hidden projects still get a page)
+// Physical Designs page: one collage piece per "section: physical" project
+const pdSrc = withAssetVersions(fs.readFileSync(path.join(ROOT, 'physical-designs.html'), 'utf8'));
+const c = pdSrc.indexOf(PD_START), d = pdSrc.indexOf(PD_END);
+if (c < 0 || d < c) {
+  warn(`physical-designs.html: ${PD_START} … ${PD_END} markers not found — pieces not generated`);
+  fs.writeFileSync(path.join(OUT, 'physical-designs.html'), pdSrc);
+} else {
+  const html = pdSrc.slice(0, c + PD_START.length) + '\n' + physicalPieces(physical) + '\n        ' + pdSrc.slice(d);
+  fs.writeFileSync(path.join(OUT, 'physical-designs.html'), html);
+}
+
+// project pages (Previous / Next follow the order within the homepage or the Physical Designs page;
+// hidden projects still get a page)
 const shell = pageShell();
 fs.mkdirSync(path.join(OUT, 'work'), { recursive: true });
-projects.forEach((p, i) => {
-  fs.writeFileSync(path.join(OUT, 'work', `${p.name}.html`), projectPage(p, projects[i - 1], projects[i + 1], shell));
-  console.log(`+ ${p.layout.padEnd(6)} ${String(p.order).padStart(3)}  work/${p.name}.html  (${(p.showHero && p.hero ? 1 : 0) + p.gallery.length} images)`);
-});
+for (const group of [portfolio, physical]) {
+  group.forEach((p, i) => {
+    fs.writeFileSync(path.join(OUT, 'work', `${p.name}.html`), withAssetVersions(projectPage(p, group[i - 1], group[i + 1], shell)));
+    console.log(`+ ${(p.section === 'physical' ? 'phys' : p.layout).padEnd(6)} ${String(p.order).padStart(3)}  work/${p.name}.html  (${(p.hero ? 1 : 0) + p.gallery.length} images)`);
+  });
+}
 
 // Dev/preview copies: SITE_NOINDEX=1 asks search engines to stay away (meta tag + robots.txt).
 if (/^(1|true|yes)$/i.test(process.env.SITE_NOINDEX || '')) {

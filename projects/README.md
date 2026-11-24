@@ -51,7 +51,25 @@ To take a project down, delete its folder (or set `layout: hidden` to keep its p
 | `behance:` | Link to the project on Behance (shows "View on Behance"). |
 | `pdf:` | A PDF in the folder to link from the page, e.g. `pdf: magazine.pdf`. |
 | `pdf-label:` | Button text for the PDF. Default `View PDF`. |
-| `show-hero:` | `no` to leave the hero picture off the project page (homepage card only). |
+| `meta:` | A short line under the page title, e.g. `meta: 2024 · Glass, lamp hardware`. |
+| `section:` | `physical` = shown on the Physical Designs page instead of the homepage (`order:` then sets its place there). Default: homepage. |
+
+### Project page gallery ("My process")
+
+The hero picture sits at the top of the page next to the title; the numbered pictures make a
+brick wall of rounded tiles under "My process". Each tile zooms to the artwork in its picture;
+clicking any picture opens it full size.
+
+| Setting | What it does |
+|---|---|
+| `big:` | The picture shown as one big tile (two tiles wide, two rows tall), e.g. `big: 4.jpg`. With 4 or fewer pictures the gallery becomes a compact group around it. |
+| `big-row:` / `big-col:` | Where the big tile goes: its row (1 = first) and which tile of that row it starts at. Default row 1, tile 2. |
+| `big-fill:` | `yes` = zoom the big picture in to fill its tile (else it is shown whole). |
+| `rows:` | Fixed tiles per row instead of the edge-to-edge wall, e.g. `rows: 4, 4` (no big tile). |
+| `whole-rows:` | Rows that show only whole tiles, nothing cut off at the window edges, e.g. `whole-rows: 1`. |
+| `zoom:` | Extra zoom for single pictures, `file factor`, comma-separated, e.g. `zoom: 2.png 1.3`. |
+| `whole:` | Pictures never cropped in their tile, comma-separated. |
+| `gallery:` | Exact pictures and order, comma-separated, e.g. to leave one out. Default: all numbered pictures in number order. |
 
 ## Picture sizes
 

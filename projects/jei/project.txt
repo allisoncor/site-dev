@@ -4,5 +4,9 @@ layout: tile
 card: I was hired by Radeus Labs to refresh Jei’s logo. They wanted a new logo for their website and press releases.
 button: View Logo
 alt: Jei Communication Recorders logo refresh
+big: 4.jpg
+big-row: 2
+big-col: 2
+zoom: 2.png 1.3
 
 I was hired by Radeus Labs to refresh Jei’s logo. They wanted a new logo for their website and press releases.

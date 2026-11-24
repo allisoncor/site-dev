@@ -5,6 +5,7 @@ card: The goal of this project is to redesign the cover for “If Only I Had Tol
 button: View Cover
 show-hero: no
 alt: Redesigned book cover for 'If Only I Had Told Her' by Laura Nowlin
+big: 3.jpg
 
 The goal of this project is to redesign the cover for “If Only I Had Told Her” by Laura Nowlin to boost its visual appeal, attract new readers, and increase sales.
 

@@ -1,0 +1,7 @@
+title: Fire to the Flame
+section: physical
+order: 2
+meta: 2026 · Blown glass, oil can, steel
+alt: Fire to the Flame — glass sculpture
+whole-rows: 1
+

@@ -1,0 +1,7 @@
+title: Glass Wall Lamp
+section: physical
+order: 1
+meta: 2024 · Glass, lamp hardware
+alt: Glass Wall Lamp mounted on a wall
+whole-rows: 1
+
