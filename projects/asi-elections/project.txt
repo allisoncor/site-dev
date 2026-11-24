@@ -5,10 +5,13 @@ card-whole: yes
 card-bg: #efc8d0
 button: View Campaign
 alt: ASI Elections vote campaign post: a chocolate-dipped Dubai strawberry over a repeating pink and brown VOTE pattern
-whole: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg, 7.jpg
-rows: 4, 3
-card: A social media campaign I designed as a Graphic Designer for Associated Students, Inc. at CSUSB to get students voting in the 2026 ASI Elections, with a free treat each day for the first 200 students who showed proof of voting.
+whole: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 13.jpg, 6.jpg, 7.jpg, 8.jpg, 9.jpg, 11.jpg, 12.jpg
+gallery: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 13.jpg, 6.jpg, 7.jpg, 8.jpg, 9.jpg, 11.jpg, 12.jpg
+rows: 4, 4, 4
+card: A campaign I designed as a Graphic Designer for Associated Students, Inc. at CSUSB to get students voting in the 2026 ASI Elections and Run Off Elections, with a free treat each day for students who showed proof of voting.
 
-A social media campaign I designed as a Graphic Designer for Associated Students, Inc. at CSUSB to get students voting in the 2026 ASI Elections. Each day of voting had its own post and treat, free for the first 200 students who showed proof of voting: 985 Coffee, Dubai Strawberry cups and Nothing Bundt Cakes Bundtinis.
+A campaign I designed as a Graphic Designer for Associated Students, Inc. at CSUSB to get students voting in the 2026 ASI Elections. Each day of voting had its own post and treat, free for the first 200 students who showed proof of voting: 985 Coffee, Dubai Strawberry cups and Nothing Bundt Cakes Bundtinis.
 
-I designed the posts in Adobe Illustrator in two sizes, 1080 × 1440 px for the feed and 1080 × 1920 px for stories, giving each day its own color palette around a bold, repeating VOTE pattern.
+When the election went to a run off, I extended the campaign for two more days of voting, Crumbl cookies on April 21 and donuts on April 22, swapping the VOTE pattern for a repeating RUN OFF VOTING pattern so the new round felt connected but new.
+
+I designed everything in Adobe Illustrator, giving each day its own color palette, and adapted each design to every format the campaign needed: Instagram feed posts (1080 × 1440 px) and stories (1080 × 1920 px), SMSU screens, Coyote Connection graphics, 11 × 17 in posters, 8.5 × 11 in flyers and 4.25 × 5.5 in handouts.
