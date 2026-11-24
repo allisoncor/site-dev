@@ -5,6 +5,5 @@ card: Mediums is an artistic magazine that celebrates unconventional mediums and
 button: View Magazine
 show-hero: no
 alt: Medium Magazine — Acrylic vs Oil cover
-behance: https://www.behance.net/gallery/213073005/Medium-Magazine
 
 Mediums is an artistic magazine that celebrates unconventional mediums and boundary-pushing creativity. Inspired by postmodern aesthetics, the concept merges vibrant visuals with experimental layouts to create a visually stimulating and thought-provoking experience.
