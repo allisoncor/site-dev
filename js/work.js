@@ -106,6 +106,11 @@
         var x0 = G + (ri % 2 ? S2 / 2 : 0);
         for (var c = 0; c < nInRow && k2 < count; c++, k2++) slotsR.push({ x: x0 + c * S2, y: ri * (TH2 + G), w: T2, h: TH2 });
       });
+      // centre the whole group across the window (rows of different lengths leave it lopsided)
+      var minX = Math.min.apply(null, slotsR.map(function (s) { return s.x; }));
+      var maxX = Math.max.apply(null, slotsR.map(function (s) { return s.x + s.w; }));
+      var dx = (100 - (maxX - minX)) / 2 - minX;
+      slotsR.forEach(function (s) { s.x += dx; });
       return slotsR;
     }
     // Only a few pictures: a compact, centred group instead of a full-width wall.
