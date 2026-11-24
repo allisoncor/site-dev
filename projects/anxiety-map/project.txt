@@ -3,5 +3,7 @@ section: physical
 order: 1
 meta: 2026 · Acrylic on MDF
 alt: Anxiety Map, a layered relief of a human figure with red muscles outlined in yellow, green, purple and blue on a gray panel
-whole-rows: 1
+gallery: 9.jpg, 10.jpg, 11.jpg, 12.jpg, 13.jpg, 14.jpg, 1.jpg, 3.jpg, 4.jpg, 16.jpg, 15.jpg, 6.jpg, 8.jpg
+rows: 4, 5, 4
 
+Anxiety Map was shown at the Robert and Frances Fullerton Museum of Art (RAFFMA) at California State University, San Bernardino, in the 2026 juried exhibition.

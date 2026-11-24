@@ -1,0 +1,14 @@
+title: ASI Elections Vote Campaign
+order: 3
+layout: tile
+card-whole: yes
+card-bg: #efc8d0
+button: View Campaign
+alt: ASI Elections vote campaign post: a chocolate-dipped Dubai strawberry over a repeating pink and brown VOTE pattern
+whole: 1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg, 7.jpg
+rows: 4, 3
+card: A social media campaign I designed as a Graphic Designer for Associated Students, Inc. at CSUSB to get students voting in the 2026 ASI Elections, with a free treat each day for the first 200 students who showed proof of voting.
+
+A social media campaign I designed as a Graphic Designer for Associated Students, Inc. at CSUSB to get students voting in the 2026 ASI Elections. Each day of voting had its own post and treat, free for the first 200 students who showed proof of voting: 985 Coffee, Dubai Strawberry cups and Nothing Bundt Cakes Bundtinis.
+
+I designed the posts in Adobe Illustrator in two sizes, 1080 × 1440 px for the feed and 1080 × 1920 px for stories, giving each day its own color palette around a bold, repeating VOTE pattern.

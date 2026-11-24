@@ -1,0 +1,14 @@
+title: Creative Blooms
+order: 4
+layout: tile
+card-whole: yes
+card-bg: #ece2e4
+button: View Campaign
+alt: Creative Blooms poster: a soft pink lotus and green buds on a pastel gradient, with the Arts and Letters Spring Showcase details
+whole: 1.jpg, 2.jpg
+rows: 2
+card: An event campaign I designed as a Graphic Designer for Associated Students, Inc. at CSUSB for Creative Blooms, the Arts and Letters Spring Showcase on March 10, 2026.
+
+An event campaign I designed as a Graphic Designer for Associated Students, Inc. at CSUSB for Creative Blooms, the Arts and Letters Spring Showcase on March 10, 2026, with artist booths, student short film screenings, giveaways and free pizza.
+
+I built the look around a soft, blooming lotus on a pastel gradient with an elegant serif title, then adapted it in Adobe Illustrator to every format the event needed: an Instagram post (1080 × 1440 px), a 1920 × 1050 px SMSU screen, 11 × 17 and 24 × 36 in posters, an 8.5 × 11 in flyer and an 11 × 24 in mini A-frame.

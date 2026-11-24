@@ -187,13 +187,13 @@
 .pd-piece { position: absolute; display: block; color: inherit; text-decoration: none; }
 .pd-piece__img {
   position: relative; display: block; overflow: hidden; background: #ddd;
-  box-shadow: 0.8vw 1vw 1.4vw rgba(0, 0, 0, 0.28);
+  box-shadow: 0.8vw 1vw 1.4vw rgba(0, 0, 0, 0.31);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .pd-piece__img img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .pd-piece:hover .pd-piece__img, .pd-piece:focus-visible .pd-piece__img {
   transform: translateY(-4px);
-  box-shadow: 1.1vw 1.4vw 2vw rgba(0, 0, 0, 0.32);
+  box-shadow: 1.1vw 1.4vw 2vw rgba(0, 0, 0, 0.35);
 }
 .pd-piece:focus-visible { outline: 3px solid var(--rose); outline-offset: 6px; }
 /* title fades in over the photo on hover */

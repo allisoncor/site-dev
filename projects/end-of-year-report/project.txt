@@ -1,0 +1,12 @@
+title: ASI 2025-2026 End of Year Report
+order: 5
+layout: tile
+button: View Report
+alt: Mockup of the ASI CSUSB 2025-2026 End of Year Report cover, deep blue with a collage of student event photos, over the table of contents
+whole: 1.jpg, 2.jpg, 3.jpg
+rows: 3
+card: A 25-page end of year report I designed as a Graphic Designer for Associated Students, Inc. at CSUSB, gathering a year of student government, programs and campus impact into one blue and white publication.
+
+A 25-page end of year report I designed as a Graphic Designer for Associated Students, Inc. at CSUSB, summing up the 2025-2026 year across every department: the Board of Directors, Finance, Elections, the Corporate Office, Howl Squad, Legislative Affairs, Graphics and Marketing, Programs, internships and student success stories.
+
+ASI asked for a blue and white design that fit the campus and the ASI brand. Working from the content each department sent and the year's event photos, I designed an information-heavy report that reads clearly and stays consistent from cover to close.

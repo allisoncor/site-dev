@@ -47,8 +47,11 @@ To take a project down, delete its folder (or set `layout: hidden` to keep its p
 | `layout:` | `hero` = big full-width card, `tile` = half-width card in the two-column grid, `wide` = full-width card inside the grid, `hidden` = page only, no homepage card. |
 | `card:` | Short text on the homepage card. If missing, the first paragraph of the description is used. |
 | `button:` | Button text on the card, e.g. `View Magazine`. Default `View Project`. |
+| `card-whole:` | `yes` = show the whole picture on a tile card, zoomed out instead of cropped to the tile shape. |
+| `card-bg:` | Color behind a `card-whole` picture, e.g. `#efc8d0`. Default light gray. |
 | `alt:` | Description of the hero picture for screen readers. Default: the title. |
 | `behance:` | Link to the project on Behance (shows "View on Behance"). |
+| `link:` | A web address to link from the page as a button; `link-label:` sets its text (default `View Link`). |
 | `pdf:` | A PDF in the folder to link from the page, e.g. `pdf: magazine.pdf`. |
 | `pdf-label:` | Button text for the PDF. Default `View PDF`. |
 | `meta:` | A short line under the page title, e.g. `meta: 2024 · Glass, lamp hardware`. |

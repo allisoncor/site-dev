@@ -4,4 +4,7 @@ order: 4
 meta: 2026 · Blown glass, oil can, steel
 alt: Fire to the Flame, glass sculpture
 whole-rows: 1
+link: https://www.instagram.com/p/DfpV_AIIAn_/?hl=en&img_index=6
+link-label: View the GEEX Feature
 
+Fire to the Flame was selected for the 2026 Community Currents Student Survey by GEEX: The Glass Education Exchange and published in GEEX Journal Vol. II, which records the work of emerging glass artists from academic and community glass programs.

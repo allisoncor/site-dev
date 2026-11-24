@@ -1,5 +1,5 @@
 title: Medium Magazine
-order: 7
+order: 9
 layout: tile
 card: Mediums is an artistic magazine that celebrates unconventional mediums and boundary-pushing creativity. Inspired by postmodern aesthetics, the concept merges vibrant visuals with experimental layouts to create a visually stimulating and thought-provoking experience.
 button: View Magazine

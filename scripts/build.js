@@ -147,6 +147,8 @@ function loadProjects() {
       button: meta.button || 'View Project',
       alt: meta.alt || meta.title || name,
       showHero: !/^(no|false)$/i.test(meta['show-hero'] || ''),
+      cardWhole: /^(yes|true|whole)$/i.test(meta['card-whole'] || ''),
+      cardBg: /^#[0-9a-f]{3,8}$/i.test(meta['card-bg'] || '') ? meta['card-bg'] : '',
     });
   }
   return list.sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
@@ -158,12 +160,13 @@ function card(p, indent) {
   if (p.layout === 'hero') cls.push('project--hero');
   if (p.layout === 'wide') cls.push('project--wide');
   if (hasDescender(p.title)) cls.push('project--desc');
+  if (p.cardWhole) cls.push('project--whole');
   const href = `work/${p.name}.html`;
   let img = '';
   if (p.hero) {
     const src = `projects/${p.name}/${p.hero}`;
     const size = imageSize(path.join(SRC_PROJECTS, p.name, p.hero));
-    img = `<img src="${fileUrl(src)}" alt="${esc(p.alt)}"${size ? ` width="${size[0]}" height="${size[1]}"` : ''}>`;
+    img = `<img src="${fileUrl(src)}" alt="${esc(p.alt)}"${size ? ` width="${size[0]}" height="${size[1]}"` : ''}${p.cardBg ? ` style="background:${p.cardBg}"` : ''}>`;
   }
   const i = indent;
   return `${i}<article class="${cls.join(' ')}">
@@ -247,6 +250,7 @@ function projectPage(p, prev, next, shell) {
 
   const links = [];
   if (p.meta.pdf) links.push(`<a class="btn" href="../${fileUrl(`projects/${p.name}/${p.meta.pdf}`)}" target="_blank" rel="noopener">${esc(p.meta['pdf-label'] || 'View PDF')}</a>`);
+  if (p.meta.link) links.push(`<a class="btn" href="${esc(p.meta.link)}" target="_blank" rel="noopener">${esc(p.meta['link-label'] || 'View Link')}</a>`);
   if (p.meta.behance) links.push(`<a class="work-link" href="${esc(p.meta.behance)}" target="_blank" rel="noopener">View on Behance</a>`);
   const pager = (q, cls, label) => q
     ? `<a class="work-pager__${cls}" href="${q.name}.html"><span>${label}</span>${esc(q.title)}</a>`
@@ -366,12 +370,14 @@ if (c < 0 || d < c) {
 }
 
 // project pages (Previous / Next follow the order within the homepage or the Physical Designs page;
-// hidden projects still get a page)
+// hidden projects still get a page, but are left out of Previous / Next)
 const shell = pageShell();
 fs.mkdirSync(path.join(OUT, 'work'), { recursive: true });
 for (const group of [portfolio, physical]) {
-  group.forEach((p, i) => {
-    fs.writeFileSync(path.join(OUT, 'work', `${p.name}.html`), withAssetVersions(projectPage(p, group[i - 1], group[i + 1], shell)));
+  const shown = group.filter(q => q.layout !== 'hidden');   // Previous / Next skip hidden projects
+  group.forEach((p) => {
+    const i = shown.indexOf(p);
+    fs.writeFileSync(path.join(OUT, 'work', `${p.name}.html`), withAssetVersions(projectPage(p, i < 0 ? null : shown[i - 1], i < 0 ? null : shown[i + 1], shell)));
     console.log(`+ ${(p.section === 'physical' ? 'phys' : p.layout).padEnd(6)} ${String(p.order).padStart(3)}  work/${p.name}.html  (${(p.hero ? 1 : 0) + p.gallery.length} images)`);
   });
 }
