@@ -1,5 +1,5 @@
 title: ASI 2025-2026 End of Year Report
-order: 5
+order: 4
 layout: tile
 button: View Report
 alt: Mockup of the ASI CSUSB 2025-2026 End of Year Report cover, deep blue with a collage of student event photos, over the table of contents

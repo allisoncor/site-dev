@@ -1,5 +1,5 @@
 title: Creative Blooms
-order: 4
+order: 6
 layout: tile
 card-whole: yes
 card-bg: #ece2e4

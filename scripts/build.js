@@ -57,8 +57,8 @@ const assetVersion = p => {
   const f = path.join(ROOT, p);
   return fs.existsSync(f) ? crypto.createHash('sha1').update(fs.readFileSync(f)).digest('hex').slice(0, 8) : '0';
 };
-// css/work.css and js/physical.js links in hand-written pages get the current version tag
-const withAssetVersions = html => html.replace(/((?:\.\.\/)?)(css\/work\.css|js\/physical\.js)\?v=[^"]*/g,
+// every css/ and js/ link gets the current version tag, so a changed file is fetched at once
+const withAssetVersions = html => html.replace(/((?:\.\.\/)?)((?:css|js)\/[\w.-]+\.(?:css|js))\?v=[^"]*/g,
   (m, up, f) => `${up}${f}?v=${assetVersion(f)}`);
 
 function copyDir(src, dst) {
@@ -258,7 +258,7 @@ function projectPage(p, prev, next, shell) {
   const paragraphs = p.paragraphs.length ? p.paragraphs : (p.meta.card ? [p.meta.card] : []);
   const back = physical
     ? `<a class="work-back" href="../physical-designs.html">${ARROW_LEFT}Physical designs</a>`
-    : `<a class="work-back" href="../index.html">${ARROW_LEFT}Digital designs</a>`;
+    : `<a class="work-back" href="../">${ARROW_LEFT}Digital designs</a>`;
   // JSON for js/work.js; "</" is escaped so nothing in it can close the script tag
   const data = JSON.stringify(galleryData(p, urls)).replace(/</g, '\\u003c');
 
@@ -309,7 +309,8 @@ function pageShell() {
        .replace(/  <main>[\s\S]*?<\/main>/, '<!-- MAIN -->')
        .replace(/\s*<script src="js\/physical\.js[^"]*"><\/script>/, '')
        .replace(/ aria-current="page"/g, '')
-       .replace(/(href|src)="(?!https?:|mailto:|#|\/|\.\.\/)([^"]+)"/g, '$1="../$2"');
+       .replace(/(href|src)="(?!https?:|mailto:|#|\/|\.\.\/)([^"]+)"/g, '$1="../$2"')
+       .replace(/href="\.\.\/\.\/"/g, 'href="../"');        // the home page link: ./ becomes ../
   return h;
 }
 
@@ -381,6 +382,15 @@ for (const group of [portfolio, physical]) {
     console.log(`+ ${(p.section === 'physical' ? 'phys' : p.layout).padEnd(6)} ${String(p.order).padStart(3)}  work/${p.name}.html  (${(p.hero ? 1 : 0) + p.gallery.length} images)`);
   });
 }
+
+// Stamp every page's css/js links with the files' current version tags (hand-written pages included),
+// so visitors get changed styles and scripts straight away instead of a cached old copy.
+const stamp = d => fs.readdirSync(d, { withFileTypes: true }).forEach(e => {
+  const f = path.join(d, e.name);
+  if (e.isDirectory()) return stamp(f);
+  if (f.endsWith('.html')) fs.writeFileSync(f, withAssetVersions(fs.readFileSync(f, 'utf8')));
+});
+stamp(OUT);
 
 // Dev/preview copies: SITE_NOINDEX=1 asks search engines to stay away (meta tag + robots.txt).
 if (/^(1|true|yes)$/i.test(process.env.SITE_NOINDEX || '')) {

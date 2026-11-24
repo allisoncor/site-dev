@@ -1,5 +1,5 @@
 title: Jei
-order: 6
+order: 5
 layout: tile
 card: I was hired by Radeus Labs to refresh Jei’s logo. They wanted a new logo for their website and press releases.
 button: View Logo
