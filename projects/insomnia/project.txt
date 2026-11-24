@@ -4,5 +4,9 @@ layout: wide
 card: A website I designed for Blue Bottle’s new venture of opening stores for the late-night shopper. These stores offer cookies and coffee all through the night. I used Blue Bottle’s branding and Insomnia’s cookies.
 button: View Website
 alt: Insomnia Coffee + Cookies — website design for late-night coffee and cookies
+big: 2.jpg
+big-row: 1
+big-col: 2
+big-fill: yes
 
 A website I designed for Blue Bottle’s new venture of opening stores for the late-night shopper. These stores offer cookies and coffee all through the night. I used Blue Bottle’s branding and Insomnia’s cookies.
