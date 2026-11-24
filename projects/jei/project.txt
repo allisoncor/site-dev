@@ -1,12 +1,14 @@
-title: Jei
+title: Jerauld Electronics Incorporated
 order: 5
 layout: tile
-card: I was hired by Radeus Labs to refresh Jei’s logo. They wanted a new logo for their website and press releases.
+card: A logo refresh for Jerauld Electronics Incorporated (Jei) after Radeus Labs bought the company in 2024, turning a pixelated 2014 logo into a clean, usable mark.
 button: View Logo
-alt: Jei Communication Recorders logo refresh
+alt: Jerauld Electronics Incorporated (Jei) Communication Recorders logo refresh
 big: 4.jpg
 big-row: 2
 big-col: 2
 zoom: 2.png 1.3
 
-I was hired by Radeus Labs to refresh Jei’s logo. They wanted a new logo for their website and press releases.
+When Radeus Labs bought Jerauld Electronics Incorporated (Jei) in 2024, the new ownership wanted a new logo for their website and press releases. I was given Jei's original logo from 2014, which had become so pixelated and low quality that it was hard to use, and was asked to make it usable again.
+
+Through the transition, Jei stopped carrying its full product line and focused only on its recording devices. Radeus wanted to keep a lot of what Jei stood for, including its bright red, so I rebuilt the logo as a clean, sharp mark for that more focused direction while keeping the color and character the brand was known for.
