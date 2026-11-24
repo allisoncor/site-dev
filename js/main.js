@@ -1,4 +1,4 @@
-// Hamburger menu toggle — shared by every page
+// Hamburger menu toggle, shared by every page
 (function () {
   var toggle = document.querySelector('.menu-toggle');
   var menu = document.querySelector('.mobile-menu');

@@ -164,7 +164,7 @@
 .work2-text .work2-meta { margin: -0.4em 0 1.2em; font-weight: 400; color: var(--ink); letter-spacing: 0.02em; }
 .work2-text .work-links { justify-content: flex-start; }
 
-/* Physical designs: tall photos — keep the hero within the window height */
+/* Physical designs: tall photos; keep the hero within the window height */
 .work--physical .work2-hero { justify-self: start; width: fit-content; max-width: 100%; }
 .work--physical .work2-hero img { width: auto; max-width: 100%; max-height: 78vh; }
 

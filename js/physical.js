@@ -6,9 +6,9 @@
   // Odd pieces start halfway down the piece before; even pieces start just below it.
   var PATTERN = [
     { x: 42.5, w: 57.5 },   // right, large
-    { x: 0,    w: 34.5 },   // left, small — tucked halfway down the one before
-    { x: 64.6, w: 34   },   // right, small — just below the one before
-    { x: 0,    w: 48   }    // left, medium — tucked halfway down the one before
+    { x: 0,    w: 34.5 },   // left, small, tucked halfway down the one before
+    { x: 64.6, w: 34   },   // right, small, just below the one before
+    { x: 0,    w: 48   }    // left, medium, tucked halfway down the one before
   ];
   var GAP = 3;              // space below a piece before an "even" piece starts (% of width)
   var root = document.getElementById('collage');

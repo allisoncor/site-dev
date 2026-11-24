@@ -115,7 +115,7 @@ function loadProjects() {
     if (!e.isDirectory()) continue;
     const name = e.name, dir = path.join(SRC_PROJECTS, name);
     if (!fs.existsSync(path.join(dir, 'project.txt'))) { warn(`projects/${name}: no project.txt, skipped`); continue; }
-    if (!/^[a-z0-9-]+$/.test(name)) { warn(`projects/${name}: folder names must be lowercase letters, numbers and dashes — skipped`); continue; }
+    if (!/^[a-z0-9-]+$/.test(name)) { warn(`projects/${name}: folder names must be lowercase letters, numbers and dashes, skipped`); continue; }
 
     const { meta, paragraphs } = readProjectFile(path.join(dir, 'project.txt'));
     const files = fs.readdirSync(dir);
@@ -135,7 +135,7 @@ function loadProjects() {
     if (meta.big && !gallery.includes(meta.big)) warn(`projects/${name}: big picture "${meta.big}" is not in the gallery`);
 
     if (!meta.title) warn(`projects/${name}: no "title:" line`);
-    if (!hero) warn(`projects/${name}: no hero image (hero.jpg) — homepage card will have no picture`);
+    if (!hero) warn(`projects/${name}: no hero image (hero.jpg), so the homepage card will have no picture`);
     if (!['hero', 'tile', 'wide', 'hidden'].includes(layout)) warn(`projects/${name}: layout "${layout}" should be hero, tile, wide or hidden`);
     if (meta.pdf && !files.includes(meta.pdf)) warn(`projects/${name}: pdf "${meta.pdf}" not found in the folder`);
 
@@ -291,7 +291,7 @@ ${p.gallery.length ? `
   <script src="../js/work.js?v=${assetVersion('js/work.js')}"></script>`;
 
   return shell
-    .replace('<!-- TITLE -->', `${esc(p.title)} — Allison Correnti`)
+    .replace('<!-- TITLE -->', `${esc(p.title)} | Allison Correnti`)
     .replace('<!-- DESCRIPTION -->', esc((paragraphs[0] || p.meta.meta || p.title).slice(0, 155)))
     .replace('<!-- MAIN -->', main);
 }
@@ -331,7 +331,7 @@ for (const e of fs.readdirSync(ROOT, { withFileTypes: true })) {
 const projects = loadProjects();
 const portfolio = projects.filter(p => p.section !== 'physical');
 const physical = projects.filter(p => p.section === 'physical' && p.layout !== 'hidden');
-if (physical.some(p => !p.hero)) warn('a "section: physical" project has no hero picture — it is left off the Physical Designs page');
+if (physical.some(p => !p.hero)) warn('a "section: physical" project has no hero picture, so it is left off the Physical Designs page');
 physical.splice(0, physical.length, ...physical.filter(p => p.hero));
 
 // project files that are published: hero, numbered images, the PDF
@@ -348,7 +348,7 @@ for (const p of projects) {
 const indexSrc = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const a = indexSrc.indexOf(MARK_START), b = indexSrc.indexOf(MARK_END);
 if (a < 0 || b < a) {
-  warn(`index.html: ${MARK_START} … ${MARK_END} markers not found — homepage cards not generated`);
+  warn(`index.html: ${MARK_START} … ${MARK_END} markers not found, so homepage cards are not generated`);
 } else {
   const html = indexSrc.slice(0, a + MARK_START.length) + '\n' + homepageCards(portfolio) + '\n      ' + indexSrc.slice(b);
   fs.writeFileSync(path.join(OUT, 'index.html'), html);
@@ -358,7 +358,7 @@ if (a < 0 || b < a) {
 const pdSrc = withAssetVersions(fs.readFileSync(path.join(ROOT, 'physical-designs.html'), 'utf8'));
 const c = pdSrc.indexOf(PD_START), d = pdSrc.indexOf(PD_END);
 if (c < 0 || d < c) {
-  warn(`physical-designs.html: ${PD_START} … ${PD_END} markers not found — pieces not generated`);
+  warn(`physical-designs.html: ${PD_START} … ${PD_END} markers not found, so pieces are not generated`);
   fs.writeFileSync(path.join(OUT, 'physical-designs.html'), pdSrc);
 } else {
   const html = pdSrc.slice(0, c + PD_START.length) + '\n' + physicalPieces(physical) + '\n        ' + pdSrc.slice(d);

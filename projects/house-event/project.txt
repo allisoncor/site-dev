@@ -1,9 +1,9 @@
 title: House Event Visual Identity
 order: 2
 layout: hero
-card: For this project, I developed a visual identity for House Event, a group born from the underground music scene of downtown San Diego. Drawing inspiration from their electrifying live performances, I crafted designs that reflect their dynamic and raw energy. House Event is all about pulsating beats and vibrant nightlife — their aesthetic blends edgy street style with a cutting-edge, experimental flair.
+card: For this project, I developed a visual identity for House Event, a group born from the underground music scene of downtown San Diego. Drawing inspiration from their electrifying live performances, I crafted designs that reflect their dynamic and raw energy. House Event is all about pulsating beats and vibrant nightlife. Their aesthetic blends edgy street style with a cutting-edge, experimental flair.
 button: View Project
-alt: House Event visual identity — billboard, packaging, phone mockups, and custom typeface
+alt: House Event visual identity: billboard, packaging, phone mockups, and custom typeface
 rows: 4, 4
 
 For this project, I was tasked with creating a visual identity for House Event. Drawing inspiration from the pulsating energy of the underground music scene, I aimed to craft designs and promotional material that reflect the electrifying atmosphere of a live performance.

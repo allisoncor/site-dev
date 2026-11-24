@@ -1,5 +1,5 @@
 /* ============================================================
-   Allison Correnti — Portfolio
+   Allison Correnti: Portfolio
    Shared stylesheet: banner, footer, project cards, layout.
    Design source: design/HOME-mockup.png
    ============================================================ */
@@ -103,7 +103,7 @@ a { color: inherit; }
   /* ~20px at the 1920px design width (measured from mockup; 28pt read too large next to the title) */
   font-size: clamp(12px, 1.042vw, 20px);
   letter-spacing: 0.18em;
-  /* letter-spacing adds a phantom space after the last character — cancel it */
+  /* letter-spacing adds a phantom space after the last character; cancel it */
   margin-right: -0.18em;
   text-transform: uppercase;
   text-decoration: none;

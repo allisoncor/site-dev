@@ -3,6 +3,6 @@ order: 8
 layout: tile
 card: An infographic for a sensing toothbrush that detects plaque and cavities, guards against over-brushing, and connects to your phone to help improve your brushing habits.
 button: View Infographic
-alt: Sensing Toothbrush infographic — features list around a toothbrush illustration
+alt: Sensing Toothbrush infographic: features list around a toothbrush illustration
 
 An infographic for a sensing toothbrush that detects plaque and cavities, guards against over-brushing, and connects to your phone to help improve your brushing habits.
