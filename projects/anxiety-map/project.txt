@@ -1,0 +1,7 @@
+title: Anxiety Map
+section: physical
+order: 1
+meta: 2026 · Acrylic on MDF
+alt: Anxiety Map, a layered relief of a human figure with red muscles outlined in yellow, green, purple and blue on a gray panel
+whole-rows: 1
+

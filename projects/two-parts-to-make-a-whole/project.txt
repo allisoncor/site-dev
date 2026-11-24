@@ -1,6 +1,6 @@
 title: Two Parts to Make a Whole
 section: physical
-order: 3
+order: 5
 meta: 2025 · Glass, steel, stone
 alt: Two Parts to Make a Whole: glass, steel and stone sculpture
 big: 2.jpg

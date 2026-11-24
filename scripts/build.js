@@ -254,7 +254,7 @@ function projectPage(p, prev, next, shell) {
   const paragraphs = p.paragraphs.length ? p.paragraphs : (p.meta.card ? [p.meta.card] : []);
   const back = physical
     ? `<a class="work-back" href="../physical-designs.html">${ARROW_LEFT}Physical designs</a>`
-    : `<a class="work-back" href="../index.html">${ARROW_LEFT}All projects</a>`;
+    : `<a class="work-back" href="../index.html">${ARROW_LEFT}Digital designs</a>`;
   // JSON for js/work.js; "</" is escaped so nothing in it can close the script tag
   const data = JSON.stringify(galleryData(p, urls)).replace(/</g, '\\u003c');
 
