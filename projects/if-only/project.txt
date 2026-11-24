@@ -1,5 +1,5 @@
 title: “If Only I Had Told Her”
-order: 3
+order: 6
 layout: tile
 card: The goal of this project is to redesign the cover for “If Only I Had Told Her” by Laura Nowlin to boost its visual appeal, attract new readers, and increase sales.
 button: View Cover
