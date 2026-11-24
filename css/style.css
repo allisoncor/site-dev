@@ -406,6 +406,8 @@ a { color: inherit; }
 @media (max-width: 720px) {
   .resume-head { flex-direction: column; }
   .resume-entry-head { flex-direction: column; gap: 2px; }
+  .resume-entry-head h3 { text-wrap: pretty; }
+  .resume-entry-head h3 + h3 { margin-top: 6px; }
   .resume-skills { grid-template-columns: 1fr; }
   .resume-skills dt { border-bottom: none; padding-bottom: 0; }
 }
